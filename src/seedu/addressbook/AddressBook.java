@@ -451,13 +451,10 @@ public class AddressBook {
      * @return person shown in list
      */
     private static String executeEditPhone(String commandArgs) {
-        if (!isEditPersonPhoneArgsValid(commandArgs)) {
-            return getMessageForInvalidCommandInput(COMMAND_EDIT_PHONE_WORD, getUsageInfoForEditPhoneCommand());
-        }
         // find person
         final ArrayList<String> info = extractKeywordsFromEditPersonPhoneArgs(commandArgs);
         ArrayList<HashMap<String, String>> persons = getPersonsWithNameContainingAnyKeyword(info);
-        if (persons.size() == 0) {
+        if (!isEditPersonPhoneArgsValid(commandArgs) || persons.size() == 0) {
             return getMessageForInvalidCommandInput(COMMAND_EDIT_PHONE_WORD, getUsageInfoForEditPhoneCommand());
         }
         HashMap<String, String> person = persons.get(0);
